@@ -1,0 +1,4 @@
+It is currently round {roundNum}
+{player0name} has {player0roundtotal}
+{player1name} has {player1roundtotal}
+{player2name} has {player2roundtotal}
