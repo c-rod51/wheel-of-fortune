@@ -20,7 +20,7 @@ turntext = ""
 wheellist = []
 roundWord = ""
 blankWord = []
-vowels = {"a", "e", "i", "o", "u"}
+vowels = {"A", "E", "I", "O", "U"}
 roundstatus = ""
 finalroundtext = ""
 

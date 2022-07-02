@@ -1,2 +1,3 @@
+---------------------------------
 It is currently {player}'s turn.
 {player} has {roundmoney} dollars.
