@@ -1,3 +1,4 @@
 ---------------------------------
 It is currently {player}'s turn.
 {player} has {roundmoney} dollars.
+The word is {word2guess}.
