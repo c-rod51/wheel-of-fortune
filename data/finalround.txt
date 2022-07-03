@@ -1,3 +1,4 @@
+----------------------------------------------------------------
 Congratulations, {winner}! You are moving to the final round.
 We will begin with a word and reveal R-S-T-L-N-E if they are in the word.
 You are allowed to pick 3 more consonants and 1 more vowel.

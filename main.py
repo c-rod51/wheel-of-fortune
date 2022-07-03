@@ -24,7 +24,6 @@ vowels = {"A", "E", "I", "O", "U"}
 roundstatus = ""
 finalroundtext = ""
 
-#Read Dictionary
 def readDictionaryFile():
     global dictionary
     # Read dictionary file in from dictionary file location
@@ -33,15 +32,12 @@ def readDictionaryFile():
     f.close()
     # Store each word in a list.
 
-#Read Turn txt file
 def readTurnTxtFile():
     global turntext   
     #read in turn intial turn status "message" from file
     f = open(turntextloc, 'r')
     turntext = f.read()
     f.close()
-
-#Read Final round txt file
 
 def readFinalRoundTxtFile():
     global finalroundtext   
@@ -50,8 +46,6 @@ def readFinalRoundTxtFile():
     finalroundtext = f.read()
     f.close()
 
-#Read round status txt file
-
 def readRoundStatusTxtFile():
     global roundstatus
     # read the round status  the Config roundstatusloc file location
@@ -59,13 +53,12 @@ def readRoundStatusTxtFile():
     roundstatus = f.read()
     f.close()
 
-#Read
 def readWheelTxtFile():
     global wheellist
     # read the Wheel name from input using the Config wheelloc file location
     f = open(wheeltextloc, 'r')
     wheellist = f.read().splitlines()
-    f.close
+    f.close()
 
 def getPlayerInfo():
     global players
@@ -89,7 +82,7 @@ def gameSetup():
     readWheelTxtFile()
     getPlayerInfo()
     readRoundStatusTxtFile()
-    readFinalRoundTxtFile() 
+    readFinalRoundTxtFile()
 
 def getWord():
     global dictionary
@@ -167,7 +160,6 @@ def remainingLetters(word2guess, word_w_blanks):
         if word2guess[i] != word_w_blanks[i]:
             letters_left.append(word2guess[i])
     return letters_left
-        
 
 def guessletter(letter, playerNum): 
     global players
@@ -273,12 +265,20 @@ def wofTurn(playerNum):
                 choice = str(input(f'{current_player} (S)pin the wheel or (G)uess the word (S/G)?: ')).upper()
         
         #Check if remaining letters are all vowels
+        elif all([letter not in vowels for letter in letters_left]):
+            print('No more vowels left')
+            choice = str(input(f'{current_player} (S)pin the wheel or (G)uess the word (S/G)?: ')).upper()
+            while choice not in ['S', 'G']:
+                print("Not a correct option")
+                choice = str(input(f'{current_player} (S)pin the wheel or (G)uess the word (S/G)?: ')).upper()
+                
+        #Check if no more vowels
         elif all([letter in vowels for letter in letters_left]):
             print('Only vowels left')
             choice = str(input(f'{current_player} (B)uy vowel or (G)uess the word (B/G)?: ')).upper()
             while choice not in ['B', 'G']:
                 print("Not a correct option")
-                choice = str(input(f'{current_player} (B)uy vowel or (G)uess the word (B/G)?: ')).upper()    
+                choice = str(input(f'{current_player} (B)uy vowel or (G)uess the word (B/G)?: ')).upper() 
             
         else:
             # and Ask to (s)pin the wheel, (b)uy vowel, or G(uess) the word using
@@ -311,7 +311,6 @@ def wofTurn(playerNum):
     else:
         stillinTurn = False
     return stillinRound
-
 
 def wofRound(thisround):
     global players
@@ -386,15 +385,15 @@ def wofFinalRound():
     print(blankWord)
     # Remember guessletter should fill in the letters with the positions in blankWord
     # Get user to guess word
-    guessWord(winplayer)
+    player_guess = str(input('Enter your guess: ')).upper()
     # If they do, add finalprize and gametotal and print out that the player won
-    if blankWord == roundWord:
-        gametotal = players[winplayer]['gametotal']
-        prize_money = finalprize + gametotal
+    gametotal = players[winplayer]['gametotal']
+    if player_guess == roundWord:
+        prizemoney = finalprize + gametotal
         winning_player = players[winplayer]['name']
         print(f'Congrats! {winning_player} has won {prizemoney} dollars.')
     elif blankWord != roundWord:
-        print(f'No, the correct answer was {roundWord}. You lose')
+        print(f'No, the correct answer was {roundWord}. You lose, but you still take home {gametotal}')
 
 
 def main():
